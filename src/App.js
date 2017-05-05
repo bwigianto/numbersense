@@ -18,13 +18,36 @@ class App extends Component {
   }
 }
 
-var RandomSubtractionQuestion = {
-  randInt: function(a, b) {
-    return Math.floor(Math.random() * (b+1)) + a;
-  },
+var randInt = function(a, b) {
+  return Math.floor(Math.random() * (b+1)) + a;
+};
+
+var RandomAddQuestion = {
   gen: function() {
-    var a = this.randInt(0, 1000);
-    var b = this.randInt(0, 1000);
+    var a = randInt(0, 1000);
+    var b = randInt(0, 1000);
+    var x = Math.min(a, b);
+    var y = Math.max(a, b);
+    var ans = x+y;
+    return {question: y + '+' + x, answer: ans};
+  }
+};
+
+var RandomMultiQuestion = {
+  gen: function() {
+    var a = randInt(0, 1000);
+    var b = randInt(0, 1000);
+    var x = Math.min(a, b);
+    var y = Math.max(a, b);
+    var ans = x*y;
+    return {question: y + '*' + x, answer: ans};
+  }
+};
+
+var RandomSubtractionQuestion = {
+  gen: function() {
+    var a = randInt(0, 1000);
+    var b = randInt(0, 1000);
     var x = Math.min(a,b);
     var y = Math.max(a,b);
     var ans = y - x;
@@ -32,19 +55,24 @@ var RandomSubtractionQuestion = {
   }
 };
 
+var randomQuestion = function() {
+  var questions = [RandomAddQuestion.gen, RandomMultiQuestion.gen, RandomSubtractionQuestion.gen];
+  return questions[Math.floor(Math.random()*questions.length)]();
+}
+
 class Questions extends Component {
   constructor(props) {
     super(props);
-    var qa = RandomSubtractionQuestion.gen();
+    var qa = randomQuestion();
     this.state = {value: '', question: qa.question, answer: qa.answer, status: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  nextQuestion(val) {
-    var qa = RandomSubtractionQuestion.gen();
-    this.setState({value: val, question: qa.question, answer: qa.answer, status: ''});
+  updateQuestion(val, state) {
+    var qa = randomQuestion();
+    this.setState({value: val, question: qa.question, answer: qa.answer, status: state});
   }
 
   handleChange(event) {
@@ -55,9 +83,8 @@ class Questions extends Component {
     var state = 'Wrong';
     if (parseInt(this.state.value, 10) === parseInt(this.state.answer, 10)){
       state = 'Correct!';
-    this.setState({value: event.target.value, question: this.state.question, answer: this.state.answer, status: state});
-      this.nextQuestion('');
     }
+    this.updateQuestion('', state);
     
     event.preventDefault();
   }
@@ -65,10 +92,10 @@ class Questions extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
+        <div>
           {this.state.question}
-        </label>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </div>
+        <input type="text" value={this.state.value} onChange={this.handleChange} />
         <input type="submit" value="Submit" />
         <div>
           {this.state.status}
