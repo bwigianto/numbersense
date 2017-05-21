@@ -1,21 +1,31 @@
+body {
+  background-color: #333333;
+  font-family: 'Open Sans', Helvetica;
+}
+
 .App {
   text-align: center;
+  color: #9B9B9B;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #4A4A4A;
   color: white;
+  font-size: 36px;
+  letter-spacing: -1px;
+  outline: 0;
+  padding: 5px 20px;
+  text-align: center;
+  transition: all 0.3s;
+  width: 200px;
 }
 
 .App-intro {
-  font-size: large;
+  height: 150px;
+  padding: 20px;
+  font-size: 50px;
 }
 
 @keyframes App-logo-spin {

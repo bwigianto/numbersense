@@ -6,9 +6,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
-        </div>
         <p className="App-intro">
           <Questions/>
         </p>
@@ -52,8 +49,10 @@ class Questions extends Component {
         <div>
           {this.state.question}
         </div>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
-        <input type="submit" value="Submit" />
+        <label>
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <div class="label-text"></div>
+        </label>
         <div>
           {this.state.status}
         </div>
