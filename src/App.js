@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { randomQuestion } from './questions/randomQuestion.js';
 
 class App extends Component {
   render() {
@@ -14,48 +15,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-var randInt = function(a, b) {
-  return Math.floor(Math.random() * (b+1)) + a;
-};
-
-var RandomAddQuestion = {
-  gen: function() {
-    var a = randInt(0, 1000);
-    var b = randInt(0, 1000);
-    var x = Math.min(a, b);
-    var y = Math.max(a, b);
-    var ans = x+y;
-    return {question: y + '+' + x, answer: ans};
-  }
-};
-
-var RandomMultiQuestion = {
-  gen: function() {
-    var a = randInt(0, 1000);
-    var b = randInt(0, 1000);
-    var x = Math.min(a, b);
-    var y = Math.max(a, b);
-    var ans = x*y;
-    return {question: y + '*' + x, answer: ans};
-  }
-};
-
-var RandomSubtractionQuestion = {
-  gen: function() {
-    var a = randInt(0, 1000);
-    var b = randInt(0, 1000);
-    var x = Math.min(a,b);
-    var y = Math.max(a,b);
-    var ans = y - x;
-    return {question: y + '-' + x, answer: ans};
-  }
-};
-
-var randomQuestion = function() {
-  var questions = [RandomAddQuestion.gen, RandomMultiQuestion.gen, RandomSubtractionQuestion.gen];
-  return questions[Math.floor(Math.random()*questions.length)]();
 }
 
 class Questions extends Component {
