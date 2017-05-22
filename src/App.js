@@ -18,15 +18,13 @@ class Questions extends Component {
   constructor(props) {
     super(props);
     var qa = randomQuestion();
-    this.state = {value: '', question: qa.question, answer: qa.answer, status: ''};
+    this.state = {value: '', question: qa.question, answer: qa.answer, status: '', correct: 0, total: 0};
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   updateQuestion(val, state) {
     var qa = randomQuestion();
-    this.setState({value: val, question: qa.question, answer: qa.answer, status: state});
+    this.setState({value: val, question: qa.question, answer: qa.answer, status: state, correct: state === 'Correct!' ? this.state.correct+1: this.state.correct, total: this.state.total + 1});
   }
 
   handleChange(event) {
@@ -45,17 +43,19 @@ class Questions extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit.bind(this)}>
         <div>
           {this.state.question}
         </div>
         <label>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} />
           <div class="label-text"></div>
         </label>
         <div>
           {this.state.status}
         </div>
+        <br/>
+        <div>{this.state.correct}/{this.state.total}</div>
       </form>
     );
   }
