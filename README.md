@@ -1,3 +1,18 @@
+# Numbersense
+
+This is a simple game testing your number sense skills. The problem types are based on past [numbersense](http://www.uiltexas.org/academics/stem/number-sense) tests.
+
+## Getting Started
+
+Assuming you are all set up with React, 
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
